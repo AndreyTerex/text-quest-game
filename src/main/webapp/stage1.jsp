@@ -1,5 +1,5 @@
-<%@ page import="org.example.textquestgame.entity.Player" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="org.example.textquestgame.entity.Player" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     Player player = (Player) session.getAttribute("player");
@@ -7,34 +7,41 @@
         response.sendRedirect("index.jsp");
         return;
     }
-    pageContext.setAttribute("player", player);
 %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stage 1 — Коридор Воспоминаний</title>
     <link rel="stylesheet" href="static/Styles.css">
 </head>
 <body>
-<h1>🧩 Коридор Воспоминаний</h1>
-<p>Привет, <c:out value="${player.playerName}"/>! Ты очнулся в узком тёмном коридоре.<br>
-Перед тобой — три двери.<br>
-На одной — символ сердца, на второй — меч, на третьей — маска.<br>
-Голос в голове нашёптывает: «Выбери воспоминание, которое приведёт тебя к истине…»</p>
+<header class="page-header">
+    <h1>🧩 Коридор Воспоминаний</h1>
+    <p>
+        Привет, <c:out value="${player.playerName}"/>! Ты очнулся в узком тёмном коридоре.<br>
+        Перед тобой — три двери. На одной — символ сердца, на второй — меч, на третьей — маска.<br>
+        Голос в голове шепчет: «Выбери воспоминание, которое приведёт тебя к истине…»
+    </p>
+</header>
 
-<form action="/Stage1Servlet" method="post">
-    <input type="radio" id="heart" name="choice" value="heart" required>
-    <label for="heart">❤️ Сердце — ты вспоминаешь важного человека.</label><br>
+<main class="page-content">
+    <form action="/Stage1Servlet" method="post" class="container">
+        <div class="radio-group">
+            <input type="radio" id="heart" name="choice" value="heart" required>
+            <label for="heart" class="radio-label">❤️ Сердце — ты вспоминаешь важного человека.</label>
 
-    <input type="radio" id="sword" name="choice" value="sword">
-    <label for="sword">⚔️ Меч — ты вспоминаешь момент своей борьбы.</label><br>
+            <input type="radio" id="sword" name="choice" value="sword">
+            <label for="sword" class="radio-label">⚔️ Меч — ты вспоминаешь момент своей борьбы.</label>
 
-    <input type="radio" id="mask" name="choice" value="mask">
-    <label for="mask">🎭 Маска — ты открываешь ложное воспоминание.</label><br><br>
+            <input type="radio" id="mask" name="choice" value="mask">
+            <label for="mask" class="radio-label">🎭 Маска — ты открываешь ложное воспоминание.</label>
+        </div>
+        <button type="submit" class="button">Выбрать</button>
+    </form>
+</main>
 
-    <button type="submit">Выбрать</button>
-</form>
 <footer class="player-footer">
     <span>👤 <b><c:out value="${player.playerName}"/></b></span> |
     <span>Стадия: <b><c:out value="${player.gameStage.stage}"/></b></span> |

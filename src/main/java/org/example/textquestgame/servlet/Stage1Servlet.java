@@ -13,16 +13,7 @@ import org.example.textquestgame.gameService.StagesService;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/Stage1Servlet")
-public class Stage1Servlet extends HttpServlet {
-    GameService gameService;
-    StagesService stagesService;
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        ServletContext servletContext = getServletContext();
-        gameService = (GameService) servletContext.getAttribute("GameService");
-        stagesService = (StagesService) servletContext.getAttribute("StagesService");
-    }
+public class Stage1Servlet extends BaseServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

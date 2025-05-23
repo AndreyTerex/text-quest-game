@@ -14,22 +14,11 @@ import org.example.textquestgame.gameService.StagesService;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/Stage4Servlet")
-public class Stage4Servlet extends HttpServlet {
-    GameService gameService;
-    StagesService stagesService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        ServletContext servletContext = getServletContext();
-        gameService = (GameService) servletContext.getAttribute("GameService");
-        stagesService = (StagesService) servletContext.getAttribute("StagesService");
-    }
+public class Stage4Servlet extends BaseServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         stagesService.checkChoiceStage3(req,resp);
-        req.getRequestDispatcher("/stage4.jsp").forward(req,resp);
     }
 
     @Override
