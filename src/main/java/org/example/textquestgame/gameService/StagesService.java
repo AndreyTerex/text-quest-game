@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class StagesService {
     @SneakyThrows
