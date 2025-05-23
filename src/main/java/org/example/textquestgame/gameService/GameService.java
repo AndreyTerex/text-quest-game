@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 public class GameService {
@@ -52,8 +53,8 @@ public class GameService {
 
         } else {
             Player player = optionalPlayer.get();
-            session.setAttribute("player", player);
             player.saveStage("stage1");
+            session.setAttribute("player", player);
             gameDao.savePlayer(player);
             resp.sendRedirect("/Stage1Servlet");
         }
@@ -67,5 +68,40 @@ public class GameService {
             gameDao.savePlayer(player);
             session.setAttribute("player", player);
         }
+    }
+
+    public boolean Stage3SwordBattle(HttpSession session) {
+        Integer opponentHealth = (Integer) session.getAttribute("opponentHealth");
+        Integer playerHealth = (Integer) session.getAttribute("playerHealth");
+        String playerAction = (String) session.getAttribute("playerAction");
+        if (playerAction.equals("attack")) {
+            int playerAttackDamage = new Random().nextInt(5, 20);
+            opponentHealth -= playerAttackDamage;
+            if (opponentHealth > 0) {
+                int opponentAttackDamage = new Random().nextInt(5, 20);
+                playerHealth -= opponentAttackDamage;
+            }
+        }
+
+        if (playerAction.equals("defend")) {
+            int opponentAttackDamage = new Random().nextInt(8, 25);
+            playerHealth -= opponentAttackDamage / 2;
+            if (playerHealth > 0) {
+                int playerAttackDamage = new Random().nextInt(1, 5);
+                opponentHealth -= playerAttackDamage;
+            }
+        }
+
+        session.setAttribute("opponentHealth", opponentHealth);
+        session.setAttribute("playerHealth", playerHealth);
+
+        if (opponentHealth <= 0 && playerHealth > 0) {
+            return false;
+        } else if (playerHealth <= 0 && opponentHealth > 0) {
+            return false;
+        } else if (playerHealth <= 0 && opponentHealth <= 0) {
+            return false;
+        }
+        return true;
     }
 }

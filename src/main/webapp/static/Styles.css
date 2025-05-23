@@ -1,202 +1,354 @@
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --accent-color: #e74c3c;
-    --background-color: #f5f6fa;
-    --text-color: #2d3436;
-    --card-background: #ffffff;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.3s;
+    --bg: #0F0F1A;
+    --surface: #1A1A2F;
+    --primary: #7F5AF0;
+    --secondary: #2CB67D;
+    --text: #FFFFFE;
+    --text-muted: #A7A9BE;
+    --success: #00B894;
+    --gap: 1.5rem;
+    --radius: 0.75rem;
+    --shadow: 0 8px 24px rgba(0,0,0,0.3);
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-serif: 'Merriweather', serif;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 18px;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    background: var(--bg);
+    color: var(--text);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: var(--gap);
+}
+
+/* Типографика */
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin: 0 0 0.75em;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 3rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 2.25rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+p {
+    max-width: 70ch;
+    margin: 0 auto 1.25em;
+    color: var(--text-muted);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+/* Layout */
+.page-header {
+    padding: 3rem 1rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: var(--gap);
+}
+
+.page-content {
+    width: min(100% - 2rem, 75ch);
+    margin: 0 auto;
+    display: grid;
+    gap: calc(var(--gap) * 1.5);
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.07);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.header {
-    text-align: center;
-    padding: 60px 20px 40px;
-    background: linear-gradient(135deg, #ffffff, #f1f2f6);
-    border-radius: 15px;
-    box-shadow: 0 4px 20px var(--shadow-color);
-    margin-bottom: 40px;
-    position: relative;
-    overflow: hidden;
-}
-
-.header::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
-    transform: rotate(25deg);
-}
-
-.stage-title {
-    font-size: 3em;
-    color: var(--primary-color);
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
-    margin: 0;
-    position: relative;
-    z-index: 1;
-}
-
-.list-group {
-    margin-bottom: 30px;
-    background-color: var(--card-background);
-    border-radius: 12px;
-    box-shadow: 0 4px 15px var(--shadow-color);
-    overflow: hidden;
-}
-
-.list-group li {
-    padding: 18px 25px;
-    border-radius: 12px;
-    transition: all var(--transition-speed) ease;
-    position: relative;
-    background-color: var(--card-background);
-    border-bottom: 1px solid #ecedf0;
-}
-
-.list-group li:last-child {
-    border-bottom: none;
-}
-
-.list-group li:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 20px var(--shadow-color);
-    background-color: #f8f9fa;
-}
-
-.button-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin: 30px 0;
-}
-
-button {
-    padding: 14px 35px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1em;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all var(--transition-speed) ease;
-    min-width: 150px;
-    background-color: var(--secondary-color);
-    color: white;
-}
-
-button:hover {
-    background-color: var(--primary-color);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-.form-group {
-    margin-bottom: 20px;
-    animation: fadeIn var(--transition-speed) ease;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 1.05em;
-    color: var(--primary-color);
-}
-
-input[type="text"],
-input[type="number"] {
-    width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 1em;
-    transition: all var(--transition-speed) ease;
-    background-color: #fdfdfd;
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus {
-    outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-}
-
-.footer {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 1.2em;
-    color: var(--text-color);
-    padding: 30px 20px;
-    background-color: #dcdde1;
-    border-top: 1px solid #ccc;
-    animation: slideUp 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideUp {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-/* Card design */
-.card {
-    background-color: var(--card-background);
-    border-radius: 15px;
-    box-shadow: 0 6px 20px var(--shadow-color);
-    padding: 25px;
-    margin: 20px 0;
-    transition: all var(--transition-speed) ease;
-}
-
-.card:hover {
+.container:hover {
     transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35);
 }
 
-/* Scrollbar styling for modern browsers */
-::-webkit-scrollbar {
-    width: 8px;
+/* Формы */
+.form-group {
+    display: grid;
+    gap: 1rem;
 }
 
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+label {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+    display: block;
 }
 
-::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-    border-radius: 10px;
+input:not([type="radio"]),
+textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: calc(var(--radius) / 1.5);
+    transition: 0.3s ease;
+    color: var(--text);
+    font-family: var(--font-sans);
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color);
+input:not([type="radio"]):focus,
+textarea:focus {
+    border-color: var(--primary);
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    background: rgba(255,255,255,0.05);
+}
+
+/* Radio группы */
+.radio-group {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Visually hide the actual radio button */
+.radio-group input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: calc(var(--radius) / 1.5);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: 0.3s ease;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.radio-label:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.radio-label::before {
+    content: "";
+    width: 1.15rem;
+    height: 1.15rem;
+    border: 2px solid var(--text-muted);
+    border-radius: 50%;
+    transition: inherit;
+}
+
+input[type="radio"]:checked + .radio-label {
+    border-color: var(--primary);
+    background: rgba(127,90,240,0.15);
+    color: var(--text);
+}
+
+input[type="radio"]:checked + .radio-label::before {
+    border-color: var(--primary);
+    background: radial-gradient(circle at center, var(--primary) 45%, transparent 50%);
+}
+
+/* Кнопки */
+button,
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: var(--primary);
+    color: var(--text);
+    border: none;
+    border-radius: calc(var(--radius) / 1.5);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button:hover,
+.button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(127,90,240,0.25);
+    background: var(--secondary);
+}
+
+button:active,
+.button:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 5px 10px rgba(127,90,240,0.2);
+}
+
+/* Footer styling */
+.player-footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.player-footer span {
+    margin: 0 0.5em;
+}
+
+.player-footer b {
+    color: var(--text);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    button, .button {
+        width: 100%;
+        padding: 1rem 1.5rem;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg: #F0F2F5;
+        --surface: #FFFFFF;
+        --primary: #5A67D8;
+        --secondary: #38A169;
+        --text: #1A202C;
+        --text-muted: #4A5568;
+        --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    input:not([type="radio"]),
+    textarea {
+        background: #EDF2F7;
+        border-color: #CBD5E0;
+    }
+
+    input:not([type="radio"]):focus,
+    textarea:focus {
+        background: #FFFFFF;
+        border-color: var(--primary);
+    }
+
+    .radio-label {
+        background: #EDF2F7;
+        border-color: #E2E8F0;
+    }
+
+    .radio-label:hover {
+        background: #E2E8F0;
+    }
+
+    input[type="radio"]:checked + .radio-label {
+        background: rgba(90,103,216,0.1);
+        border-color: var(--primary);
+    }
+
+    button, .button {
+        color: #FFFFFF;
+    }
+
+    button:hover, .button:hover {
+        box-shadow: 0 8px 16px rgba(90,103,216,0.2);
+    }
+
+    .player-footer {
+        border-top-color: #E2E8F0;
+    }
+}
+
+/* Health Bar */
+.health-bar {
+    position: relative;
+    width: 100%;
+    height: 1.75rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 1rem;
+    margin: 1rem 0 0.5rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.10);
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 1rem 0 0 1rem;
+    transition: width 0.5s cubic-bezier(.77,0,.18,1);
+    box-shadow: 0 0 8px var(--primary);
+}
+
+.health-label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text);
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    letter-spacing: 0.03em;
+    pointer-events: none;
 }

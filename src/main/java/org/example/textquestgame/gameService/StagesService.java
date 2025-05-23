@@ -6,24 +6,26 @@ import jakarta.servlet.http.HttpSession;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class StagesService {
     @SneakyThrows
     public void checkChoiceStage3(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         String stage1Choice = (String) session.getAttribute("stage1Choice");
+        if("sword".equals(stage1Choice)){
+            req.getRequestDispatcher("stage3_sword.jsp").forward(req, resp);
+        } else if("mask".equals(stage1Choice)){
+            req.getRequestDispatcher("/stage1.jsp").forward(req, resp);
+        }
         if ("heart".equals(stage1Choice)) {
             String lovedName = (String) session.getAttribute("lovedName");
             String rememberedName = req.getParameter("rememberedName");
             if (lovedName != null && lovedName.equals(rememberedName)) {
-                resp.sendRedirect("/stage4.jsp");
+                resp.sendRedirect("stage3_heart.jsp");
                 return;
-            } else {
-                GameService gameService = (GameService) req.getServletContext().getAttribute("GameService");
-                if (gameService != null) {
-                    gameService.setGameStage(session, "stage3Lose");
-                }
-                req.getRequestDispatcher("Stage3lose.jsp").forward(req, resp);
+            } else{
+                req.getRequestDispatcher("stage3_lose.jsp").forward(req, resp);
             }
         }
     }

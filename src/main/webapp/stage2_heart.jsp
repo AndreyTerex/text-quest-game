@@ -8,27 +8,32 @@
         return;
     }
     Player player = (Player) session.getAttribute("player");
-    String playerName = player != null ? player.getPlayerName() : name;
-    String stage = player != null && player.getGameStage() != null ? player.getGameStage().getStage() : "?";
-    Integer gamesPlayed = player != null && player.getGamesPlayed() != null ? player.getGamesPlayed() : 0;
 %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stage 2 — Сердце</title>
     <link rel="stylesheet" href="static/Styles.css">
 </head>
 <body>
-<h1>❤️ За дверью — тёплый свет</h1>
-<p>Перед тобой человек, которого ты когда-то любил. Он улыбается.</p>
-<p>«Ты меня помнишь?.. Назови моё имя…»</p>
+<header class="page-header">
+    <h1>❤️ За дверью — тёплый свет</h1>
+    <p>Перед тобой человек, которого ты когда-то любил. Он улыбается.</p>
+    <p>«Ты меня помнишь?.. Назови моё имя…»</p>
+</header>
 
-<form action="/Stage2HeartServlet" method="post">
-    <label for="lovedName">Имя:</label>
-    <input type="text" id="lovedName" name="lovedName" required>
-    <button type="submit">Ответить</button>
-</form>
+<main class="page-content">
+    <form action="/Stage2HeartServlet" method="post" class="container">
+        <div class="form-group">
+            <label for="lovedName">Имя:</label>
+            <input type="text" id="lovedName" name="lovedName" required>
+        </div>
+        <button type="submit" class="button">Ответить</button>
+    </form>
+</main>
+
 <footer class="player-footer">
     <span>👤 <b><c:out value="${player.playerName}"/></b></span> |
     <span>Стадия: <b><c:out value="${player.gameStage.stage}"/></b></span> |
@@ -36,3 +41,4 @@
 </footer>
 </body>
 </html>
+

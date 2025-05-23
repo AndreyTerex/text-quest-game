@@ -13,14 +13,7 @@ import java.io.IOException;
 
 
 @WebServlet(urlPatterns = "/start")
-public class StartGameServlet extends HttpServlet {
-    GameService gameService;
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        ServletContext servletContext = getServletContext();
-        gameService = (GameService) servletContext.getAttribute("GameService");
-    }
+public class StartGameServlet extends BaseServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

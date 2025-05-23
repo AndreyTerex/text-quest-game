@@ -14,27 +14,17 @@ import org.example.textquestgame.gameService.StagesService;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/Stage3LoseServlet")
-public class Stage3LoseServlet  extends HttpServlet {
-    GameService gameService;
-    StagesService stagesService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        ServletContext servletContext = getServletContext();
-        gameService = (GameService) servletContext.getAttribute("GameService");
-        stagesService = (StagesService) servletContext.getAttribute("StagesService");
-    }
+public class Stage3LoseServlet  extends BaseServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         gameService.setGameStage(session, "stage3Lose");
-        resp.sendRedirect("Stage3lose.jsp");
+        resp.sendRedirect("stage3_lose.jsp");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("Stage3lose.jsp");
+        resp.sendRedirect("stage3_lose.jsp");
     }
 }
